@@ -58,7 +58,7 @@ MEETUPS = [
         "location": "1.323,-2.32",
         "status": "draft",
         "comment": "Discussion of Flask",
-        "images": ['https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?cs=srgb&dl=beach-exotic-holiday-248797.jpg&fm=jpg'],
+        "images": ['https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?cs=srgb&dl=beach-exotic-holiday-248797.jpg&fm=jpg']
     },
     {
         "meetupsId": 2,
@@ -67,7 +67,7 @@ MEETUPS = [
         "location": "1.323,-2.32",
         "status": "Cancelled",
         "comment": "Fellowship of Django",
-        "images": [],
+        "images": []
     },
     {
         "meetupsId": 3,
@@ -76,9 +76,9 @@ MEETUPS = [
         "location": "-1.28333, 36.81667",
         "status": "postponed",
         "comment": "Discussion on Agile",
-        "images": [],
+        "images": []
+    }
 ]
-
 
 class MeetupsModel():
     def __init__(self):

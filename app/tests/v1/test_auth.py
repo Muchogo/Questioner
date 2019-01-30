@@ -21,6 +21,7 @@ class FlaskUserTest(BaseTestCase):
     def test_user_can_signup(self):
         "Test that by posting user data to the endpoint, it gets created"
         result = self.app.post('/api/v1/signup', data=self.user_data)
+        print(result.data)
         self.assertEqual(result.status_code, 201)
         data = json.loads(result.data)
         self.assertEqual(data['message'], "Sign Up successful. Welcome!")
@@ -73,6 +74,9 @@ class FlaskUserTest(BaseTestCase):
 
     def test_sign_up_existing_username(self):
         """"Tests that a username and email are unique"""
+        user1 = self.app.post(
+            '/api/v1/signup', data=self.duplicate_username_signup_data)
+        self.assertEqual(user1.status_code, 201)
         result = self.app.post(
             '/api/v1/signup', data=self.duplicate_username_signup_data)
         self.assertEqual(result.status_code, 400)
@@ -81,6 +85,9 @@ class FlaskUserTest(BaseTestCase):
 
     def test_sign_up_existing_email(self):
         """"Tests that a username and email are unique"""
+        user2 = self.app.post(
+            '/api/v1/signup', data=self.email)
+        self.assertEqual(user2.status_code, 201)
         result = self.app.post(
             '/api/v1/signup', data=self.duplicate_email_signup_data)
         self.assertEqual(result.status_code, 400)

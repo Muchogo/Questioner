@@ -12,28 +12,37 @@ class BaseTestCase(TestCase):
         self.app.testing = True
 
         # USER TEST DATA
-
+        
         user_signup_data = {"first_name": "Eric",
                             "last_name": "Muchogo",
                             "other_names": "Ndungu",
                             "phonenumber": "0725530122",
-                            "email": "ericmuchogo@gmail.com",
-                            "username": "Muchogo",
+                            "email": "ericmuchogooooo@gmail.com",
+                            "username": "Valerieee",
                             "password": "1000"}
         duplicate_username_signup_data = {"first_name": "Eric",
                                           "last_name": "Muchogo",
                                           "other_names": "Ndungu",
                                           "phonenumber": "0725530122",
-                                          "email": "ericmuchogo@gmail.com",
+                                          "email": "ericmuchogo2@gmail.com",
                                           "username": "Muchogo2",
                                           "password": "1000"}
         duplicate_email_signup_data = {"first_name": "Eric",
                                        "last_name": "Muchogo",
                                        "other_names": "Ndungu",
                                        "phonenumber": "0725530122",
-                                       "email": "eric@gmail.com",
+                                       "email": "ericmuchogo5@gmail.com",
                                        "username": "Muchogo3",
                                        "password": "1000"}
+        duplicate_email = {
+            "first_name": "Eric",
+            "last_name": "Muchogo",
+            "other_names": "Ndungu",
+            "phonenumber": "0725530122",
+            "email": "ericmuchogo5@gmail.com",
+            "username": "Muchogo10",
+            "password": "1000"
+        }
         wrong_signup_data = {"first_name": "Eric",
                              "last_name": "Muchogo",
                              "other_names": "Ndungu",
@@ -63,6 +72,7 @@ class BaseTestCase(TestCase):
         self.duplicate_email_signup_data = json.dumps(
             duplicate_email_signup_data
         )
+        self.email = json.dumps(duplicate_email)
         self.wrong_login_data_format = json.dumps(wrong_login_data_format)
         self.nonexisting_user = json.dumps(nonexisting_user)
 
@@ -74,18 +84,21 @@ class BaseTestCase(TestCase):
             "location": "-1.28333, 36.81667",
             "createdBy": 1,
             "images": [image_in_base64, image_in_base64],
+            "videos": [image_in_base64, image_in_base64]
         }
         new_meetups_data_nonexisting_user = {
             "comment": "Postponed",
             "location": "-1.28333, 36.81667",
             "createdBy": 100,
             "images": [image_in_base64, image_in_base64],
+            "videos": [image_in_base64, image_in_base64]
         }
         new_meetups_data_with_wrong_format = {
             "comment": "cancelled",
             "location": "-1.28333, 36.81667",
             "createdBy": 1,
             "images": [image_in_base64, image_in_base64],
+            "videos": [image_in_base64, image_in_base64]
         }
         self.new_meetups = json.dumps(new_meetups_data)
         self.new_meetups_data_with_wrong_format = json.dumps(

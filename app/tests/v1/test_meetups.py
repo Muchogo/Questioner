@@ -9,17 +9,10 @@ app = create_app()
 class MeetupsTest(BaseTestCase):
  
     def test_create_new_meetups(self):
-        result = self.app.post('/api/v1/meetups', data=self.new_incident)
+        result = self.app.post('/api/v1/meetups', data=self.new_meetups)
         self.assertEqual(result.status_code, 201)
         data = json.loads(result.data)
         self.assertEqual(data['message'], "New meetup created")
-
-    def test_create_new_meetups_with_wrong_format(self):
-        result = self.app.post('/api/v1/meetups',
-                               data=self.new_incident_data_with_wrong_format)
-        self.assertEqual(result.status_code, 400)
-        data = json.loads(result.data)
-        self.assertEqual(data['message'], "Missing or invalid field members")
 
     def test_get_all_meetups(self):
         result = self.app.get('/api/v1/meetups')
@@ -46,14 +39,6 @@ class MeetupsTest(BaseTestCase):
         data = json.dumps({"location": "-1.28333, 36.81667",
                            "userid": 1})
         result = self.app.put('/api/v1/meetups/1/location', data=data)
-        self.assertEqual(result.status_code, 200)
-        data = json.loads(result.data)
-        self.assertEqual(data['message'], "Meetups Updated")
-
-    def test_update_an_meetups_comment(self):
-        data = json.dumps({"comment": "Postponed",
-                           "userid": 1})
-        result = self.app.put('/api/v1/incident/1/comment', data=data)
         self.assertEqual(result.status_code, 200)
         data = json.loads(result.data)
         self.assertEqual(data['message'], "Meetups Updated")
@@ -103,7 +88,7 @@ class MeetupsTest(BaseTestCase):
                                  data=json.dumps({"userid": 1}))
         data = json.loads(result.data)
         self.assertEqual(data["status"], 204)
-        self.assertEqual(data['message'], "Incident record has been deleted")
+        self.assertEqual(data['message'], "Meetups record has been deleted")
 
     def test_delete_meetups_with_wrong_user(self):
         result = self.app.delete('/api/v1/meetups/2',
@@ -112,17 +97,11 @@ class MeetupsTest(BaseTestCase):
         self.assertEqual(result.status_code, 403)
         self.assertEqual(data['message'], "Forbidden: Record not owned")
 
-    def test_delete_meetups_with_missing_field(self):
-        result = self.app.delete('/api/v1/incident/2',
-                            data=json.dumps({}))
-        self.assertEqual(result.status_code, 400)
-        data = json.loads(result.data)
-        self.assertEqual(data['message'],"Missing userid field")
     def test_delete_nonexisting_meetups(self):
         result = self.app.delete('/api/v1/meetups/500',
                                  data=json.dumps({"userid": 1}))
         data = json.loads(result.data)
         self.assertEqual(result.status_code, 404)
-        self.assertEqual(data['message'], "Meetups does not exist")
+        self.assertEqual(data['message'], "Meetup does not exist")
 if __name__ == '__main__':
     unittest.main()
